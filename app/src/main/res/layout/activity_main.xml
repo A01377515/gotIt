@@ -42,4 +42,13 @@
         app:layout_constraintTop_toBottomOf="@+id/main_title"
         app:layout_constraintVertical_bias="0.721" />
 
+    <Button
+        android:id="@+id/buttonPrueba"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="prueba"
+        android:text="Button"
+        tools:layout_editor_absoluteX="148dp"
+        tools:layout_editor_absoluteY="481dp" />
+
 </android.support.constraint.ConstraintLayout>
