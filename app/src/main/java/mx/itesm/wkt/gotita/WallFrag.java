@@ -29,11 +29,8 @@ import java.util.ArrayList;
 
  */
 public class WallFrag extends Fragment {
-    private RecyclerView rvPosts;
 
-    public WallFrag() {
-        // Required empty public constructor
-    }
+    private RecyclerView rvPosts;
 
     private FirebaseFirestore db;
 
@@ -42,6 +39,10 @@ public class WallFrag extends Fragment {
     private static final String ITEM_DESC = "ITEM_DESC";
 
     private ArrayList<Offer> offers;
+
+    public WallFrag() {
+        // Required empty public constructor
+    }
 
     private void getDataFromFirebase(){
         offers=new ArrayList<>();
@@ -56,14 +57,15 @@ public class WallFrag extends Fragment {
                                 offers.add(document.toObject(Offer.class));
                             }
 
-                            Log.e(TAG,Integer.toString(offers.size())+" elements");
-
-                            for (Offer off : offers) {
-                                Log.e(ITEM_DESC,off.getType());
-                                Log.e(ITEM_DESC,off.getTitle());
-                                Log.e(ITEM_DESC,off.getDescription());
-                                Log.e(ITEM_DESC,off.getUser());
-                            }
+                            //Debug
+//                            Log.e(TAG,Integer.toString(offers.size())+" elements");
+//
+//                            for (Offer off : offers) {
+//                                Log.e(ITEM_DESC,off.getType());
+//                                Log.e(ITEM_DESC,off.getTitle());
+//                                Log.e(ITEM_DESC,off.getDescription());
+//                                Log.e(ITEM_DESC,off.getUser());
+//                            }
 
                             AdapterRv adapterRv = new AdapterRv(offers);
                             rvPosts.setAdapter(adapterRv);
@@ -81,7 +83,7 @@ public class WallFrag extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_personal, container, false);
+        View v = inflater.inflate(R.layout.fragment_wall, container, false);
         rvPosts = v.findViewById(R.id.rvPosts);
 
         //Firebase

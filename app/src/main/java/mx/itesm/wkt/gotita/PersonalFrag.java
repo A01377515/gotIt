@@ -42,24 +42,24 @@ public class PersonalFrag extends Fragment {
     private void getDataFromFirebase(){
         offers=new ArrayList<>();
         db.collection("feed")
+                .whereEqualTo("user","pablitomix")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.e(TAG, document.getId() + " => " + document.getData());
                                 offers.add(document.toObject(Offer.class));
                             }
 
-                            Log.e(TAG,Integer.toString(offers.size())+" elements");
-
-                            for (Offer off : offers) {
-                                Log.e(ITEM_DESC,off.getType());
-                                Log.e(ITEM_DESC,off.getTitle());
-                                Log.e(ITEM_DESC,off.getDescription());
-                                Log.e(ITEM_DESC,off.getUser());
-                            }
+                            //Debug DATA
+//                            Log.e(TAG,Integer.toString(offers.size())+" elements");
+//                            for (Offer off : offers) {
+//                                Log.e(ITEM_DESC,off.getType());
+//                                Log.e(ITEM_DESC,off.getTitle());
+//                                Log.e(ITEM_DESC,off.getDescription());
+//                                Log.e(ITEM_DESC,off.getUser());
+//                            }
 
                             AdapterRv adapterRv = new AdapterRv(offers);
                             rvPosts.setAdapter(adapterRv);
