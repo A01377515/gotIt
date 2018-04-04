@@ -78,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
                         Toast.makeText(app, "Bienvenido a gotIt", Toast.LENGTH_LONG).show();
-                        handleFacebookAccessToken(loginResult.getAccessToken());
+                        if(loginResult.getAccessToken()!=null) handleFacebookAccessToken(loginResult.getAccessToken());
+                        else Toast.makeText(app, "MASSIVE ERROR", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
