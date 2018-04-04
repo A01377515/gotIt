@@ -128,6 +128,10 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
+    public void prueba(View v){
+        Intent intWall = new Intent(this,Wall.class);
+        startActivity(intWall);
+    }
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
