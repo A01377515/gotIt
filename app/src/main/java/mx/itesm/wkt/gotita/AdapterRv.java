@@ -6,19 +6,18 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by IRV1 on 21/02/18.
  */
 
 public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
 
+    private ArrayList<Offer> offers;
 
-    private String[] arrTitulos;
-    private String[] arrDescripciones;
-
-    public AdapterRv(String[] titulos, String[] descripciones){
-        arrTitulos = titulos;
-        arrDescripciones = descripciones;
+    public AdapterRv(ArrayList<Offer> offers){
+        this.offers=new ArrayList<Offer>(offers);
     }
 
     @Override
@@ -35,13 +34,13 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
         CardView tarjeta = holder.tarjeta;
         TextView titulo = tarjeta.findViewById(R.id.tvTitulo);
         TextView descripcion = tarjeta.findViewById(R.id.tvDescripcion);
-        titulo.setText(arrTitulos[position]);
-        descripcion.setText(arrDescripciones[position]);
+        titulo.setText(offers.get(position).getTitle());
+        descripcion.setText(offers.get(position).getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return arrTitulos.length;
+        return offers.size();
     }
 
     public class Vista extends RecyclerView.ViewHolder {

@@ -131,9 +131,12 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         if (user != null) {
+//            Toast.makeText(app, mAuth.getCurrentUser().toString(),
+//                    Toast.LENGTH_LONG).show();
+            Log.e("Starting WALL",mAuth.getCurrentUser().toString());
             Intent intWall = new Intent(this, Wall.class);
             startActivity(intWall);
-            Log.e("start activity","t");
+//            Log.e("start activity","t");
         } else {
             Log.e("updateUI","yes");
             tvTitle.setText("Got It");
