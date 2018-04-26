@@ -2,9 +2,9 @@ package mx.itesm.wkt.gotita;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -14,8 +14,6 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
-import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -141,6 +139,12 @@ public class MainActivity extends AppCompatActivity {
             Log.e("updateUI","yes");
             tvTitle.setText("Got It");
         }
+    }
+
+    public void testLogin(View v){
+        Intent intWall = new Intent(this, Wall.class);
+        startActivity(intWall);
+
     }
 
 

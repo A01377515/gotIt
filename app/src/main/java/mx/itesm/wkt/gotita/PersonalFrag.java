@@ -1,5 +1,7 @@
 package mx.itesm.wkt.gotita;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -9,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +32,9 @@ public class PersonalFrag extends Fragment {
     private RecyclerView rvPosts;
 
     private FirebaseFirestore db;
+
+    private ProgressBar progressBar;
+    private TextView progressText;
 
     //    To catch errors
     private static final String TAG = "FIREBASE";
@@ -61,10 +68,25 @@ public class PersonalFrag extends Fragment {
 //                                Log.e(ITEM_DESC,off.getUser());
 //                            }
 
-                            AdapterRv adapterRv = new AdapterRv(offers);
+                            AdapterRv adapterRv = new AdapterRv(getContext(),offers);
                             rvPosts.setAdapter(adapterRv);
 
                             rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+                            progressBar.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            }).translationY(-progressText.getHeight());
+
+                            progressText.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
+                                @Override
+                                public void onAnimationEnd(Animator animation) {
+                                    super.onAnimationEnd(animation);
+                                    progressText.setVisibility(View.GONE);
+                                }
+                            }).translationY(-progressText.getHeight());
 
                         } else {
                             Log.e(TAG, "Error getting documents.", task.getException());
@@ -80,6 +102,8 @@ public class PersonalFrag extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_personal, container, false);
         rvPosts = v.findViewById(R.id.rvPosts);
+        progressBar = v.findViewById(R.id.progressBarPersonal);
+        progressText = v.findViewById(R.id.progressTextPersonal);
 
         //Firebase
 
@@ -91,6 +115,8 @@ public class PersonalFrag extends Fragment {
         db.setFirestoreSettings(settings);
 
         getDataFromFirebase();
+        progressBar.setVisibility(View.VISIBLE);
+        progressText.setVisibility(View.VISIBLE);
 
         return v;
     }
