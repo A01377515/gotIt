@@ -59,14 +59,6 @@ public class PersonalFrag extends Fragment {
                                 offers.add(document.toObject(Offer.class));
                             }
 
-                            //Debug DATA
-//                            Log.e(TAG,Integer.toString(offers.size())+" elements");
-//                            for (Offer off : offers) {
-//                                Log.e(ITEM_DESC,off.getType());
-//                                Log.e(ITEM_DESC,off.getTitle());
-//                                Log.e(ITEM_DESC,off.getDescription());
-//                                Log.e(ITEM_DESC,off.getUser());
-//                            }
 
                             AdapterRv adapterRv = new AdapterRv(getContext(),offers);
                             rvPosts.setAdapter(adapterRv);

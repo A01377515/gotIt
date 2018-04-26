@@ -16,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Pablo on 21/02/18.
@@ -74,6 +75,8 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
 
                 Intent productIntent = new Intent(v.getContext(), ProductActiv.class);
                 productIntent.putExtra("Titulo",offers.get(position).getTitle());
+
+                productIntent.putStringArrayListExtra("images",offers.get(position).getImages());
 
                 v.getContext().startActivity(productIntent);
             }

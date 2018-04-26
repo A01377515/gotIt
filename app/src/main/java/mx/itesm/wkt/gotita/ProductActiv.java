@@ -3,9 +3,12 @@ package mx.itesm.wkt.gotita;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,39 +18,82 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 
+import java.util.ArrayList;
+
 public class ProductActiv extends AppCompatActivity {
 
     private TextView titulo;
-    private ImageView imagenProducto;
+    private ViewPager viewPager;
+    private LinearLayout sliderDots;
+    private int dotsCount;
+    private ImageView[] dots;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
+
         titulo = findViewById(R.id.tituloStr);
-        imagenProducto = findViewById(R.id.imagenProducto);
+        viewPager = findViewById(R.id.viewPagerDetalle);
+        sliderDots = findViewById(R.id.sliderDots);
+
         titulo.setText(getIntent().getStringExtra("Titulo"));
 
+        ArrayList<String> images = getIntent().getStringArrayListExtra("images");
+        if(images.size() == 0){
+            images.add("https://firebasestorage.googleapis.com/v0/b/gotit-fa002.appspot.com/o/images%2FnoImgAvailable.png?alt=media&token=2e301719-b2b0-4bd8-8dce-aa3187e6e6c8");
+        }
+        ViewPagerAdapter vpAdapter = new ViewPagerAdapter(this,images);
+        viewPager.setAdapter(vpAdapter);
 
-        String url = "https://firebasestorage.googleapis.com/v0/b/gotit-fa002.appspot.com/o/images%2Fpablo1.png?alt=media&token=2c90847e-7e89-459f-b51b-901f3cbf1c22";
-        descargarImagen(url);
+        dotsCount = vpAdapter.getCount();
+        dots = new ImageView[dotsCount];
+
+        loadDots();
+
+        changeDotPosition();
+
 
     }
 
-    private void descargarImagen(String urlImg) {
-        Glide.with(getApplicationContext()).load(urlImg)
-                .listener(new RequestListener<Drawable>() {
+
+    private void loadDots() {
+
+        for (int i = 0; i < dotsCount; i++){
+            dots[i] = new ImageView(this);
+            dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.nonactive_dot));
+            LinearLayout.LayoutParams params  = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+
+            params.setMargins(8,0,8,0);
+            sliderDots.addView(dots[i],params);
+
+        }
+
+        dots[0].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.active_dot));
+
+    }
+
+    private void changeDotPosition() {
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                return false;
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
             }
 
             @Override
-            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                Toast.makeText(getApplicationContext(),"Detener cargando imagen",Toast.LENGTH_SHORT).show();
-                return false;
+            public void onPageSelected(int position) {
+                for (int i = 0; i < dotsCount; i++){
+                    dots[i].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.nonactive_dot));
+                }
+                dots[position].setImageDrawable(ContextCompat.getDrawable(getApplicationContext(),R.drawable.active_dot));
             }
-        })
-                .into(imagenProducto);
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
+
+
 }
