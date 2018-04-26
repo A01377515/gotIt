@@ -44,7 +44,8 @@
         </activity>
         <activity
             android:name=".Wall"
-            android:label="@string/title_activity_wall"></activity>
+            android:label="@string/title_activity_wall" />
+        <activity android:name=".ProductActiv"></activity>
     </application>
 
 </manifest>
