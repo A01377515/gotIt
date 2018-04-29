@@ -6,6 +6,9 @@
     <string name="title_wall">Principal</string>
     <string name="title_personal">Personal</string>
 
+    <string name="google_maps_API_key">AIzaSyCEvn7WLr65SqDFToe6S1QKBzzHc2hyULM</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="strPersonal">Personal</string>

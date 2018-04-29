@@ -17,10 +17,11 @@ public class Offer {
     private String user;
 //    private HashMap<String,Double> location;
     private GeoPoint location;
+    private int range;
 
     public Offer(){}
 
-    public Offer(boolean active, String description, ArrayList<String> images, HashMap<String,Double> price, String title, String type, String user, GeoPoint location){
+    public Offer(boolean active, String description, ArrayList<String> images, HashMap<String,Double> price, String title, String type, String user, GeoPoint location,int range){
         this.active=active;
         this.description=description;
         this.images=images;
@@ -29,6 +30,11 @@ public class Offer {
         this.type=type;
         this.user=user;
         this.location=location;
+        this.range = range;
+    }
+
+    public int getRange(){
+        return range;
     }
 
     public boolean isActive() {
