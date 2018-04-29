@@ -84,16 +84,6 @@ public class WallFrag extends Fragment {
                                 }
                             }
 
-                            //Debug
-//                            Log.e(TAG,Integer.toString(offers.size())+" elements");
-//
-//                            for (Offer off : offers) {
-//                                Log.e(ITEM_DESC,off.getType());
-//                                Log.e(ITEM_DESC,off.getTitle());
-//                                Log.e(ITEM_DESC,off.getDescription());
-//                                Log.e(ITEM_DESC,off.getUser());
-//                            }
-
 
                             progressBar.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
                                 @Override

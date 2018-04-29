@@ -7,9 +7,9 @@
 
     <ImageView
         android:id="@+id/imageViewSlider"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/black"
-        app:srcCompat="@mipmap/ic_launcher" />
+        android:background="@android:color/darker_gray"
+        />
 
 </android.support.constraint.ConstraintLayout>

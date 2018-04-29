@@ -1,43 +1,60 @@
 package mx.itesm.wkt.gotita;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
+import android.Manifest;
+import android.app.Dialog;
+import android.app.Fragment;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.DataSource;
-import com.bumptech.glide.load.engine.GlideException;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
+
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CircleOptions;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
 public class ProductActiv extends AppCompatActivity {
 
     private TextView titulo;
+    private TextView desc;
+    private TextView price;
     private ViewPager viewPager;
     private LinearLayout sliderDots;
     private int dotsCount;
     private ImageView[] dots;
+
+    // maps api
+    private SupportMapFragment gMap;
+    private static final float DEFAULT_ZOOM = 13f;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product);
 
-        titulo = findViewById(R.id.tituloStr);
         viewPager = findViewById(R.id.viewPagerDetalle);
         sliderDots = findViewById(R.id.sliderDots);
+        titulo = findViewById(R.id.tituloStr);
+        desc = findViewById(R.id.descStr);
+        price = findViewById(R.id.priceStr);
+        gMap = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
-        titulo.setText(getIntent().getStringExtra("Titulo"));
+
+
+
 
         ArrayList<String> images = getIntent().getStringArrayListExtra("images");
         if(images.size() == 0){
@@ -52,6 +69,30 @@ public class ProductActiv extends AppCompatActivity {
         loadDots();
 
         changeDotPosition();
+
+        titulo.setText(getIntent().getStringExtra("Titulo").toUpperCase());
+        desc.setText(getIntent().getStringExtra("desc"));
+        price.setText("Precio: $"+getIntent().getStringExtra("priceMin")+" - $"+getIntent().getStringExtra("priceMax"));
+        gMap.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(GoogleMap googleMap) {
+                LatLng pos = new LatLng(getIntent().getDoubleExtra("lat",0),getIntent().getDoubleExtra("long",0));
+                if (getIntent().getStringExtra("type").equals("Service")){
+                    googleMap.addCircle(new CircleOptions()
+                            .center(pos)
+                            .radius(getIntent().getIntExtra("range",1000))
+                            .strokeColor(Color.parseColor("#FFA500"))
+                            .fillColor(Color.argb(100,255, 165, 0)));
+                }else{
+                    googleMap.addMarker(new MarkerOptions().position(pos));
+                }
+
+
+
+                googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos,DEFAULT_ZOOM));
+            }
+        });
+
 
 
     }
@@ -94,6 +135,4 @@ public class ProductActiv extends AppCompatActivity {
             }
         });
     }
-
-
 }
