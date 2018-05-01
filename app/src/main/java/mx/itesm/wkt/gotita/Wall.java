@@ -15,14 +15,6 @@ import mx.itesm.wkt.gotita.Fragments.WallFrag;
 
 public class Wall extends AppCompatActivity {
 
-    private void loadPersonalPage() {
-        PersonalProductFrag fragPersonal = new PersonalProductFrag();
-        FragmentTransaction transaccion = getSupportFragmentManager().beginTransaction();
-        transaccion.replace(R.id.principalLayout, fragPersonal);
-        transaccion.addToBackStack(null);
-        transaccion.commit();
-    }
-
     private void loadWallPage() {
         WallFrag fragWall= new WallFrag();
         FragmentTransaction transaccion = getSupportFragmentManager().beginTransaction();
@@ -63,4 +55,8 @@ public class Wall extends AppCompatActivity {
         loadWallPage();
     }
 
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
 }
