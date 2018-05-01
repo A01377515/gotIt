@@ -1,4 +1,4 @@
-package mx.itesm.wkt.gotita;
+package mx.itesm.wkt.gotita.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,12 +9,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+
+import mx.itesm.wkt.gotita.NavigationBar;
+import mx.itesm.wkt.gotita.Offer;
+import mx.itesm.wkt.gotita.ProductActiv;
+import mx.itesm.wkt.gotita.R;
 
 /**
  * Created by Pablo on 21/02/18.
@@ -24,21 +31,31 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
 
     private ArrayList<Offer> offers;
     private Context actualContext = null;
-    String imgFeed;
+    private String imgFeed;
+    private NavigationBar nBar = NavigationBar.WALL;
+    private Switch activeSwitch;
 
     public AdapterRv(ArrayList<Offer> offers){
         this.offers=new ArrayList<Offer>(offers);
     }
 
-    public AdapterRv(Context context, ArrayList<Offer> offers){
+    public AdapterRv(Context context, ArrayList<Offer> offers, NavigationBar nBar){
         this.offers=new ArrayList<Offer>(offers);
         actualContext = context;
+        this.nBar = nBar;
     }
 
     @Override
     public Vista onCreateViewHolder(ViewGroup parent, int viewType) {
-        CardView tarjeta = (CardView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.tarjeta_personal, parent, false);
+        CardView tarjeta;
+        if (nBar == NavigationBar.WALL){
+            tarjeta = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.tarjeta_muro, parent, false);
+        }else{
+            tarjeta = (CardView) LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.tarjeta_personal, parent, false);
+        }
+
 
 
         return new Vista(tarjeta);
@@ -51,8 +68,29 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
         TextView titulo = tarjeta.findViewById(R.id.tvTitulo);
         TextView descripcion = tarjeta.findViewById(R.id.tvDescripcion);
         ImageView imagenProducto = tarjeta.findViewById(R.id.imageView);
+        if(nBar == NavigationBar.PERSONAL){
+            activeSwitch = tarjeta.findViewById(R.id.activeSwitch);
+
+        }
         titulo.setText(offers.get(position).getTitle());
-        descripcion.setText("$"+String.format("%,.2f",offers.get(position).getPrice().get("min"))+" - $"+String.format("%,.2f",offers.get(position).getPrice().get("max")));
+        String priceText = "$"+String.format("%,.2f",offers.get(position).getPrice().get("min"))+" - $"+String.format("%,.2f",offers.get(position).getPrice().get("max"));
+        descripcion.setText(priceText);
+
+        TextView schedule;
+        if(nBar == NavigationBar.WALL){
+            schedule = tarjeta.findViewById(R.id.scheduleStrWall);
+        }else{
+            schedule = tarjeta.findViewById(R.id.scheduleStrPersonal);
+        }
+
+        if (offers.get(position).getType().equals("Service")){
+            schedule.setVisibility(View.VISIBLE);
+            schedule.setText(offers.get(position).getSchedule().get("min")+" - "+offers.get(position).getSchedule().get("max"));
+        }
+
+
+
+
 
 
         int lenImages = offers.get(position).getImages().toArray().length;
@@ -67,14 +105,16 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
                 .load(imgFeed)
                 .apply(RequestOptions.centerCropTransform())
                 .into(imagenProducto);
-
-        if (offers.get(position).getType().equals("Service")){
-            tarjeta.setCardBackgroundColor(Color.parseColor("#FFA500"));
-        }else{
-            tarjeta.setCardBackgroundColor(Color.parseColor("#00c5ff"));
+        if (nBar == NavigationBar.WALL){
+            if (offers.get(position).getType().equals("Service")){
+                tarjeta.setCardBackgroundColor(Color.parseColor(tarjeta.getContext().getResources().getString(R.string.orange)));
+            }else{
+                tarjeta.setCardBackgroundColor(Color.parseColor(tarjeta.getContext().getResources().getString(R.string.blue)));
+            }
         }
 
-        tarjeta.findViewById(R.id.constraintLayout).setOnClickListener(new View.OnClickListener() {
+
+        tarjeta.findViewById(R.id.cardView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -88,6 +128,11 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
                 productIntent.putExtra("long",offers.get(position).getLocation().getLongitude());
                 productIntent.putExtra("range",offers.get(position).getRange());
                 productIntent.putExtra("type",offers.get(position).getType());
+                if (offers.get(position).getType().equals("Service")){
+                    productIntent.putExtra("scheduleMin",offers.get(position).getSchedule().get("min"));
+                    productIntent.putExtra("scheduleMax",offers.get(position).getSchedule().get("max"));
+
+                }
 
 
 

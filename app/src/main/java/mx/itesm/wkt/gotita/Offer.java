@@ -18,10 +18,11 @@ public class Offer {
 //    private HashMap<String,Double> location;
     private GeoPoint location;
     private int range;
+    private HashMap<String,String> schedule;
 
     public Offer(){}
 
-    public Offer(boolean active, String description, ArrayList<String> images, HashMap<String,Double> price, String title, String type, String user, GeoPoint location,int range){
+    public Offer(boolean active, String description, ArrayList<String> images, HashMap<String,Double> price, String title, String type, String user, GeoPoint location,int range, HashMap<String,String> schedule){
         this.active=active;
         this.description=description;
         this.images=images;
@@ -31,6 +32,11 @@ public class Offer {
         this.user=user;
         this.location=location;
         this.range = range;
+        this.schedule = schedule;
+    }
+
+    public HashMap<String, String> getSchedule() {
+        return schedule;
     }
 
     public int getRange(){

@@ -1,19 +1,13 @@
 package mx.itesm.wkt.gotita;
 
-import android.Manifest;
-import android.app.Dialog;
-import android.app.Fragment;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +19,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+
+import mx.itesm.wkt.gotita.Adapters.ViewPagerAdapter;
 
 public class ProductActiv extends AppCompatActivity {
 
@@ -86,8 +82,6 @@ public class ProductActiv extends AppCompatActivity {
                 }else{
                     googleMap.addMarker(new MarkerOptions().position(pos));
                 }
-
-
 
                 googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos,DEFAULT_ZOOM));
             }
