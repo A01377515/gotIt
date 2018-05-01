@@ -11,6 +11,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -49,6 +51,21 @@ public class PersonalProductFrag extends Fragment {
         // Required empty public constructor
     }
 
+    private void createCards(RecyclerView rvPosts){
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_from_bottom);
+
+
+        AdapterRv adapterRv = new AdapterRv(getContext(),offers, NavigationBar.PERSONAL);
+        rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvPosts.setAdapter(adapterRv);
+
+
+        // animation
+        rvPosts.setLayoutAnimation(controller);
+        rvPosts.getAdapter().notifyDataSetChanged();
+        rvPosts.scheduleLayoutAnimation();
+    }
+
     private void getDataFromFirebase(){
         offers=new ArrayList<>();
         db.collection("feed")
@@ -65,10 +82,6 @@ public class PersonalProductFrag extends Fragment {
                             }
 
 
-                            AdapterRv adapterRv = new AdapterRv(getContext(),offers, NavigationBar.PERSONAL);
-                            rvPosts.setAdapter(adapterRv);
-
-                            rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
                             progressBar.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
                                 @Override
                                 public void onAnimationEnd(Animator animation) {
@@ -82,6 +95,7 @@ public class PersonalProductFrag extends Fragment {
                                 public void onAnimationEnd(Animator animation) {
                                     super.onAnimationEnd(animation);
                                     progressText.setVisibility(View.GONE);
+                                    createCards(rvPosts);
                                 }
                             }).translationY(-progressText.getHeight());
 

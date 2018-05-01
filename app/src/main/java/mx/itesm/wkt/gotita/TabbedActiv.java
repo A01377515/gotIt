@@ -56,8 +56,7 @@ public class TabbedActiv extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_wall:
-                        Intent intent4 = new Intent(TabbedActiv.this, Wall.class);
-                        startActivity(intent4);
+                        finish();
                         overridePendingTransition(0, 0);
                         break;
                 }
