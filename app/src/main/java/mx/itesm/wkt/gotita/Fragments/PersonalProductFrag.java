@@ -1,4 +1,4 @@
-package mx.itesm.wkt.gotita;
+package mx.itesm.wkt.gotita.Fragments;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,11 +24,13 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
+import mx.itesm.wkt.gotita.Adapters.AdapterRv;
+import mx.itesm.wkt.gotita.NavigationBar;
+import mx.itesm.wkt.gotita.Offer;
+import mx.itesm.wkt.gotita.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class PersonalFrag extends Fragment {
+public class PersonalProductFrag extends Fragment {
+
 
     private RecyclerView rvPosts;
 
@@ -37,12 +40,12 @@ public class PersonalFrag extends Fragment {
     private TextView progressText;
 
     //    To catch errors
-    private static final String TAG = "FIREBASE";
+    private static final String TAG = "PERSONAL FRAGMENT";
     private static final String ITEM_DESC = "ITEM_DESC";
 
     private ArrayList<Offer> offers;
 
-    public PersonalFrag() {
+    public PersonalProductFrag() {
         // Required empty public constructor
     }
 
@@ -56,11 +59,13 @@ public class PersonalFrag extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                offers.add(document.toObject(Offer.class));
+                                if (document.toObject(Offer.class).getType().equals("Product")) {
+                                    offers.add(document.toObject(Offer.class));
+                                }
                             }
 
 
-                            AdapterRv adapterRv = new AdapterRv(getContext(),offers);
+                            AdapterRv adapterRv = new AdapterRv(getContext(),offers, NavigationBar.PERSONAL);
                             rvPosts.setAdapter(adapterRv);
 
                             rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -98,6 +103,8 @@ public class PersonalFrag extends Fragment {
         progressText = v.findViewById(R.id.progressTextPersonal);
 
         //Firebase
+
+
 
         db = FirebaseFirestore.getInstance();
 

@@ -1,4 +1,4 @@
-package mx.itesm.wkt.gotita;
+package mx.itesm.wkt.gotita.Adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -13,6 +13,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
+
+import mx.itesm.wkt.gotita.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
 

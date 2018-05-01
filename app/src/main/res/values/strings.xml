@@ -8,9 +8,19 @@
 
     <string name="google_maps_API_key">AIzaSyCEvn7WLr65SqDFToe6S1QKBzzHc2hyULM</string>
 
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="strPersonal">Personal</string>
     <string name="strWall">Muro</string>
+    <string name="title_activity_personal">Personal</string>
+    <string name="tab_text_1">Productos</string>
+    <string name="tab_text_2">Servicios</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="title_activity_tabbed">TabbedActiv</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="tab_text_3">Tab 3</string>
+    <string name="orange">#ff9900</string>
+    <string name="blue">#00c5ff</string>
+
 </resources>

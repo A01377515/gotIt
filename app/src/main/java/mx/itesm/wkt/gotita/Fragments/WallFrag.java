@@ -1,13 +1,10 @@
-package mx.itesm.wkt.gotita;
+package mx.itesm.wkt.gotita.Fragments;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +15,6 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,6 +24,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+
+import mx.itesm.wkt.gotita.Adapters.AdapterRv;
+import mx.itesm.wkt.gotita.NavigationBar;
+import mx.itesm.wkt.gotita.Offer;
+import mx.itesm.wkt.gotita.R;
 
 
 /**
@@ -54,10 +55,10 @@ public class WallFrag extends Fragment {
     }
 
     private void createCards(RecyclerView rvPosts){
-        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getContext(),R.anim.layout_animation_from_bottom);
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_from_bottom);
 
 
-        AdapterRv adapterRv = new AdapterRv(this.getContext(),offers);
+        AdapterRv adapterRv = new AdapterRv(this.getContext(),offers, NavigationBar.WALL);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPosts.setAdapter(adapterRv);
 

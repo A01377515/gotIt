@@ -4,7 +4,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,10 +14,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCEvn7WLr65SqDFToe6S1QKBzzHc2hyULM"/>
+            android:value="AIzaSyCEvn7WLr65SqDFToe6S1QKBzzHc2hyULM" />
 
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -54,7 +52,11 @@
         <activity
             android:name=".Wall"
             android:label="@string/title_activity_wall" />
-        <activity android:name=".ProductActiv"></activity>
+        <activity android:name=".ProductActiv" />
+        <activity
+            android:name=".TabbedActiv"
+            android:label="@string/title_activity_tabbed"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
