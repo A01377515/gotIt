@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/serviceCall"
+        android:icon="@drawable/ic_servicio36"
+        android:title="Agregar Servicio"
+        />
+
+    <item
+        android:id="@+id/productCall"
+        android:icon="@drawable/ic_producto36"
+        android:title="Agregar Producto"
+        />
+
+</menu>

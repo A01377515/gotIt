@@ -56,13 +56,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Custom Font
-        Typeface font_roboto = Typeface.createFromAsset(getAssets(),  "font/Roboto-Regular.ttf");
-
-        tvTitle=findViewById(R.id.main_title);
-
-//        Set Custom Font
-        tvTitle.setTypeface(font_roboto);
 
 //        Firebase Auth
         mAuth=FirebaseAuth.getInstance();
@@ -137,7 +130,6 @@ public class MainActivity extends AppCompatActivity {
 //            Log.e("start activity","t");
         } else {
             Log.e("updateUI","yes");
-            tvTitle.setText("Got It");
         }
     }
 

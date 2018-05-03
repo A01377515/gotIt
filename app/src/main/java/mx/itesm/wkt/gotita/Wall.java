@@ -24,6 +24,12 @@ public class Wall extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        loadWallPage();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wall);
@@ -45,14 +51,14 @@ public class Wall extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_wall:
-
+                        loadWallPage();
                         break;
                 }
 
                 return false;
             }
         });
-        loadWallPage();
+
     }
 
     @Override
