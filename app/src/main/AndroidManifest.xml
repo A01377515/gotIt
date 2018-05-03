@@ -52,11 +52,16 @@
         <activity
             android:name=".Wall"
             android:label="@string/title_activity_wall" />
-        <activity android:name=".ProductActiv" />
+        <activity android:name=".ProductActiv"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".TabbedActiv"
             android:label="@string/title_activity_tabbed"
             android:theme="@style/AppTheme" />
+        <activity android:name=".AgregarProdActiv" />
+        <activity android:name=".AddServActiv">
+
+        </activity>
     </application>
 
 </manifest>

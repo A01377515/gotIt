@@ -22,5 +22,7 @@
     <string name="tab_text_3">Tab 3</string>
     <string name="orange">#ff9900</string>
     <string name="blue">#00c5ff</string>
+    <string name="firebaseSuccess">Se ha agregado exitosamente el registro</string>
+    <string name="firebaseFailure">Se ha producido un error</string>
 
 </resources>

@@ -58,7 +58,7 @@ public class WallFrag extends Fragment {
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_from_bottom);
 
 
-        AdapterRv adapterRv = new AdapterRv(this.getContext(),offers, NavigationBar.WALL);
+        AdapterRv adapterRv = new AdapterRv(this.getContext(),offers, NavigationBar.WALL,WallFrag.this);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPosts.setAdapter(adapterRv);
 

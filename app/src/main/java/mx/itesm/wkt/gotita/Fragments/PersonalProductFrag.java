@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -15,10 +16,13 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -37,9 +41,11 @@ public class PersonalProductFrag extends Fragment {
     private RecyclerView rvPosts;
 
     private FirebaseFirestore db;
+    private FirebaseUser currUser;
 
     private ProgressBar progressBar;
     private TextView progressText;
+
 
     //    To catch errors
     private static final String TAG = "PERSONAL FRAGMENT";
@@ -55,7 +61,8 @@ public class PersonalProductFrag extends Fragment {
         LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(getContext(), R.anim.layout_animation_from_bottom);
 
 
-        AdapterRv adapterRv = new AdapterRv(getContext(),offers, NavigationBar.PERSONAL);
+        AdapterRv adapterRv = new AdapterRv(getContext(),offers, NavigationBar.PERSONAL,PersonalProductFrag.this);
+
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPosts.setAdapter(adapterRv);
 
@@ -66,23 +73,29 @@ public class PersonalProductFrag extends Fragment {
         rvPosts.scheduleLayoutAnimation();
     }
 
+
+
     private void getDataFromFirebase(){
+        currUser = FirebaseAuth.getInstance().getCurrentUser();
+
         offers=new ArrayList<>();
         db.collection("feed")
-                .whereEqualTo("user","pablitomix")
+                .whereEqualTo("user",currUser.getUid())
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+
                                 if (document.toObject(Offer.class).getType().equals("Product")) {
-                                    offers.add(document.toObject(Offer.class));
+
+                                    offers.add((Offer) document.toObject(Offer.class).withId(document.getId()));
                                 }
                             }
 
 
-                            progressBar.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
+                            /*progressBar.animate().alpha(0.0f).setListener(new AnimatorListenerAdapter() {
                                 @Override
                                 public void onAnimationEnd(Animator animation) {
                                     super.onAnimationEnd(animation);
@@ -95,9 +108,15 @@ public class PersonalProductFrag extends Fragment {
                                 public void onAnimationEnd(Animator animation) {
                                     super.onAnimationEnd(animation);
                                     progressText.setVisibility(View.GONE);
+                                    rvPosts.setVisibility(View.VISIBLE);
                                     createCards(rvPosts);
                                 }
-                            }).translationY(-progressText.getHeight());
+                            }).translationY(-progressText.getHeight());*/
+
+                            progressBar.setVisibility(View.GONE);
+                            progressText.setVisibility(View.GONE);
+                            rvPosts.setVisibility(View.VISIBLE);
+                            createCards(rvPosts);
 
                         } else {
                             Log.e(TAG, "Error getting documents.", task.getException());
@@ -112,13 +131,18 @@ public class PersonalProductFrag extends Fragment {
                              Bundle savedInstanceState) {
 
         View v = inflater.inflate(R.layout.fragment_personal, container, false);
+
         rvPosts = v.findViewById(R.id.rvPosts);
         progressBar = v.findViewById(R.id.progressBarPersonal);
         progressText = v.findViewById(R.id.progressTextPersonal);
+        return v;
+    }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
         //Firebase
-
-
 
         db = FirebaseFirestore.getInstance();
 
@@ -127,12 +151,12 @@ public class PersonalProductFrag extends Fragment {
                 .build();
         db.setFirestoreSettings(settings);
 
-        getDataFromFirebase();
+
         progressBar.setVisibility(View.VISIBLE);
         progressText.setVisibility(View.VISIBLE);
+        rvPosts.setVisibility(View.INVISIBLE);
+        getDataFromFirebase();
 
-        return v;
+
     }
-
-
 }

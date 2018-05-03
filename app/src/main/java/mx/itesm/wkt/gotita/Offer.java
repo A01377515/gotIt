@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Offer {
+public class Offer extends OfferId{
     private boolean active;
     private String description;
     private ArrayList<String> images;
@@ -19,6 +19,7 @@ public class Offer {
     private GeoPoint location;
     private int range;
     private HashMap<String,String> schedule;
+
 
     public Offer(){}
 
