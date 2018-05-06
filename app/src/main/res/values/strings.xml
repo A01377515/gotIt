@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">gotItA</string>
+    <string name="app_name">Got It?</string>
     <string name="facebook_app_id">733196167069619</string>
     <string name="fb_login_protocol_scheme">fb733196167069619</string>
-    <string name="title_activity_wall">Wall</string>
+    <string name="title_activity_wall">Muro</string>
     <string name="title_wall">Principal</string>
     <string name="title_personal">Personal</string>
 
@@ -24,5 +24,12 @@
     <string name="blue">#00c5ff</string>
     <string name="firebaseSuccess">Se ha agregado exitosamente el registro</string>
     <string name="firebaseFailure">Se ha producido un error</string>
+    <string name="logoutStr">Logout</string>
+    <string name="aboutStr">Acerca De</string>
+    <string name="wallTitle">Muro</string>
+    <string name="addProdStr">Agregar Producto</string>
+    <string name="strDatosPrinc">DATOS PRINCIPALEs</string>
+    <string name="insTitleStr">Inserte título</string>
+
 
 </resources>

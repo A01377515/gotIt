@@ -315,7 +315,6 @@
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:backgroundTint="@color/colorPrimary"
             app:srcCompat="@drawable/fab_add_clear_selector" />
 
     </android.support.constraint.ConstraintLayout>

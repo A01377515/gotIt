@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(FacebookException exception) {
-                        Toast.makeText(app, "Loggeado incorrecto", Toast.LENGTH_LONG).show();
+                        Toast.makeText(app, "No internet connection", Toast.LENGTH_LONG).show();
                         updateUI(null);
                     }
                 }
