@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -43,6 +45,8 @@ public class WallFrag extends Fragment {
 
     private ProgressBar progressBar;
     private TextView progressText;
+    private ImageView imgEmpty;
+    private SwipeRefreshLayout swipe;
 
     //    To catch errors
     private static final String TAG = "FIREBASE";
@@ -79,7 +83,7 @@ public class WallFrag extends Fragment {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Log.e(TAG, document.getId() + " => " + document.getData());
+                                //Log.e(TAG, document.getId() + " => " + document.getData());
                                 if(document.toObject(Offer.class).isActive()){
                                     offers.add(document.toObject(Offer.class));
                                 }
@@ -99,7 +103,16 @@ public class WallFrag extends Fragment {
                                 public void onAnimationEnd(Animator animation) {
                                     super.onAnimationEnd(animation);
                                     progressText.setVisibility(View.GONE);
+                                    if (offers.size() == 0){
+                                        imgEmpty.setVisibility(View.VISIBLE);
+                                        imgEmpty.setAlpha(0.0f);
+                                        imgEmpty.animate().alpha(1.0f);
+
+                                    }else{
+                                        imgEmpty.setVisibility(View.GONE);
+                                    }
                                     createCards(rvPosts);
+                                    swipe.setRefreshing(false);
                                 }
                             }).translationY(-progressText.getHeight());
 
@@ -120,6 +133,19 @@ public class WallFrag extends Fragment {
         rvPosts = v.findViewById(R.id.rvPosts);
         progressBar = v.findViewById(R.id.progressBarWall);
         progressText = v.findViewById(R.id.progressTextWall);
+        imgEmpty = v.findViewById(R.id.imgEmptyWall);
+
+        swipe = v.findViewById(R.id.swipeWall);
+        swipe.setColorSchemeColors(getResources().getColor(R.color.colorPrimaryDark),getResources().getColor(R.color.colorPrimary));
+        swipe.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                getDataFromFirebase();
+
+            }
+        });
+
         //Firebase
 
         db = FirebaseFirestore.getInstance();

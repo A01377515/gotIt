@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -12,14 +13,25 @@ import android.view.MenuItem;
 
 import com.facebook.AccessToken;
 import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.GoogleAuthUtil;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 
 import mx.itesm.wkt.gotita.Adapters.BottomNavigationViewHelper;
 import mx.itesm.wkt.gotita.Fragments.PersonalProductFrag;
 import mx.itesm.wkt.gotita.Fragments.WallFrag;
 
 public class Wall extends AppCompatActivity {
+
+    private GoogleSignInClient mGoogleSignInClient;
+    private FirebaseAuth mAuth;
+
 
     private void loadWallPage() {
         WallFrag fragWall= new WallFrag();
@@ -32,6 +44,7 @@ public class Wall extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         loadWallPage();
     }
 
@@ -40,11 +53,23 @@ public class Wall extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wall);
 
+
+        // google login
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        mAuth=FirebaseAuth.getInstance();
+        setTitle("Muro de "+mAuth.getCurrentUser().getDisplayName());
+
         BottomNavigationView navigation = findViewById(R.id.navigation);
         BottomNavigationViewHelper.disableShiftMode(navigation);
         Menu menu = navigation.getMenu();
         MenuItem menuItem = menu.getItem(0);
         menuItem.setChecked(true);
+
 
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
@@ -60,7 +85,7 @@ public class Wall extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_wall:
-                        loadWallPage();
+
                         break;
                 }
 
@@ -87,7 +112,7 @@ public class Wall extends AppCompatActivity {
 
         switch (item.getItemId()){
             case R.id.logoutBtn:
-                fbLogout();
+                logout();
                 break;
             case R.id.aboutBtn:
                 break;
@@ -98,9 +123,16 @@ public class Wall extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void fbLogout() {
+    private void logout() {
         FirebaseAuth.getInstance().signOut();
         LoginManager.getInstance().logOut();
-        finish();
+        // Google sign out
+        mGoogleSignInClient.signOut().addOnCompleteListener(this,
+                new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        finish();
+                    }
+                });
     }
 }

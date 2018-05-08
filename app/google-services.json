@@ -8,63 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:370915203252:android:a91ff00f28600707",
-        "android_client_info": {
-          "package_name": "mx.itesm.sechf.gotit"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "370915203252-p0rbcar820lv1is4efap1npjt6g53sdo.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "mx.itesm.sechf.gotit",
-            "certificate_hash": "ec3ebc5f432874259024f9507f2a0ccd6e30d49a"
-          }
-        },
-        {
-          "client_id": "370915203252-tb5n5dqhogu0of59o7amjva1e0vv809r.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAVIU3be6QDzyFHH3H_raqOvbn8Uq9VjaM"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "370915203252-tb5n5dqhogu0of59o7amjva1e0vv809r.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "370915203252-1gcoc3qcffu62mttndenjbnonrorqo56.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "mx.hmsa.gotIt"
-              }
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
         "mobilesdk_app_id": "1:370915203252:android:14374649dba63c27",
         "android_client_info": {
           "package_name": "mx.itesm.wkt.gotita"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "370915203252-95g9iajrtv9cas7n4qe3olf8skt0nlpa.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.itesm.wkt.gotita",
+            "certificate_hash": "02baf325957e70d072ffa2ef3504b0bf1f8265d4"
+          }
+        },
         {
           "client_id": "370915203252-56lfhntepjf5a3hqsrsk59lrnosfsq91.apps.googleusercontent.com",
           "client_type": 1,
@@ -99,15 +56,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "370915203252-tb5n5dqhogu0of59o7amjva1e0vv809r.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
               "client_id": "370915203252-1gcoc3qcffu62mttndenjbnonrorqo56.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "mx.hmsa.gotIt"
               }
+            },
+            {
+              "client_id": "370915203252-tb5n5dqhogu0of59o7amjva1e0vv809r.apps.googleusercontent.com",
+              "client_type": 3
             }
           ]
         },
