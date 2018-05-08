@@ -1,13 +1,18 @@
 package mx.itesm.wkt.gotita;
 
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,7 +36,7 @@ public class ProductActiv extends AppCompatActivity {
     private LinearLayout sliderDots;
     private int dotsCount;
     private ImageView[] dots;
-
+    private Button contact;
     // maps api
     private SupportMapFragment gMap;
     private static final float DEFAULT_ZOOM = 13f;
@@ -46,6 +51,7 @@ public class ProductActiv extends AppCompatActivity {
         titulo = findViewById(R.id.tituloStr);
         desc = findViewById(R.id.descStr);
         price = findViewById(R.id.priceStr);
+        contact = findViewById(R.id.contactBtn);
         gMap = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 
 
@@ -87,6 +93,27 @@ public class ProductActiv extends AppCompatActivity {
             }
         });
 
+
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent emailInt = new Intent(Intent.ACTION_SEND);
+                emailInt.setData(Uri.parse("mailto:"));
+                String[] emailadds = new String[1];
+                emailadds[0] = getIntent().getStringExtra("email")+"";
+                emailInt.putExtra(Intent.EXTRA_EMAIL,emailadds);
+                emailInt.putExtra(Intent.EXTRA_SUBJECT,"Estoy interesado en "+getIntent().getStringExtra("Titulo"));
+                emailInt.setType("text/plain");
+
+                if (emailInt.resolveActivity(getPackageManager()) != null) {
+                    startActivity(Intent.createChooser(emailInt, "Send Email"));
+                }else{
+                    Toast.makeText(getApplicationContext(),"No hay apps de correo instaladas",Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
+        });
 
 
     }

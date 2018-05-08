@@ -183,6 +183,7 @@ public class AdapterRv extends RecyclerView.Adapter<AdapterRv.Vista> {
                     productIntent.putExtra("scheduleMax", offers.get(position).getSchedule().get("max"));
 
                 }
+                productIntent.putExtra("email",offers.get(position).getEmail());
 
                 v.getContext().startActivity(productIntent);
             }

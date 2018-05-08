@@ -287,6 +287,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:text="RANGO DE VENTA"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
 
@@ -300,6 +301,7 @@
             android:background="@android:color/holo_blue_light"
             android:text="Seleccionar rango"
             android:textColor="@color/blanco"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.06"
             app:layout_constraintStart_toStartOf="parent"
@@ -311,11 +313,13 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginTop="32dp"
             android:clickable="true"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/fab_add_clear_selector" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout5"
+            app:srcCompat="@android:drawable/ic_menu_save" />
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

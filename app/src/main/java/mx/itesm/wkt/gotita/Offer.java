@@ -15,6 +15,7 @@ public class Offer extends OfferId{
     private String title;
     private String type;
     private String user;
+    private String email;
 //    private HashMap<String,Double> location;
     private GeoPoint location;
     private int range;
@@ -23,7 +24,7 @@ public class Offer extends OfferId{
 
     public Offer(){}
 
-    public Offer(boolean active, String description, ArrayList<String> images, HashMap<String,Double> price, String title, String type, String user, GeoPoint location,int range, HashMap<String,String> schedule){
+    public Offer(boolean active, String description, ArrayList<String> images, HashMap<String,Double> price, String title, String type, String user, GeoPoint location,int range, HashMap<String,String> schedule, String email){
         this.active=active;
         this.description=description;
         this.images=images;
@@ -34,6 +35,7 @@ public class Offer extends OfferId{
         this.location=location;
         this.range = range;
         this.schedule = schedule;
+        this.email = email;
     }
 
     public HashMap<String, String> getSchedule() {
@@ -74,5 +76,9 @@ public class Offer extends OfferId{
 
     public GeoPoint getLocation() {
         return location;
+    }
+
+    public String getEmail(){
+        return email;
     }
 }

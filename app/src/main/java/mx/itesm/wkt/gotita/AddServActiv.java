@@ -160,7 +160,7 @@ public class AddServActiv extends AppCompatActivity {
         price.put("min",Double.parseDouble(minTxt.getText().toString()));
         price.put("max",Double.parseDouble(maxTxt.getText().toString()));
         images.add(url);
-        Offer of = new Offer(true,desc.getText()+"",images,price,titulo.getText()+"","Service",currUser.getUid(),location,1000,schedule);
+        Offer of = new Offer(true,desc.getText()+"",images,price,titulo.getText()+"","Service",currUser.getUid(),location,1000,schedule,currUser.getEmail());
 
         db.collection("feed").add(of).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
             @Override

@@ -30,10 +30,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
             android:gravity="center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textSize="25sp" />
@@ -60,6 +60,16 @@
             android:gravity="center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textSize="20sp" />
+
+
+        <Button style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/contactBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="Contactar Vendedor" />
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:tools="http://schemas.android.com/tools"
