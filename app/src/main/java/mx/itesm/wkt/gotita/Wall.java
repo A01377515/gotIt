@@ -85,7 +85,6 @@ public class Wall extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_wall:
-
                         break;
                 }
 
@@ -115,6 +114,8 @@ public class Wall extends AppCompatActivity {
                 logout();
                 break;
             case R.id.aboutBtn:
+                Intent acercaDeIntent = new Intent(Wall.this,AcercaDeActiv.class);
+                startActivity(acercaDeIntent);
                 break;
             default:
                 break;

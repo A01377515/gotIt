@@ -30,7 +30,12 @@
     <string name="addProdStr">Agregar Producto</string>
     <string name="strDatosPrinc">DATOS PRINCIPALEs</string>
     <string name="insTitleStr">Inserte título</string>
-
+    <string name="pabloStr">Pablo Alejandro Sánchez Tadeo A01377515</string>
+    <string name="kevinStr">Kyungtak Woo A01372055</string>
+    <string name="sergioStr">Sergio Alberto Hernández Méndez A01371446</string>
+    <string name="erickStr">Sergio Erick Chávez Flores A01371147</string>
+    <string name="adrianStr">Sergio Adrian González Hidalgo A01371584</string>
+    <string name="materiaStr">Proyectos de desarrollo para dispositivos móviles</string>
 
 
 </resources>
