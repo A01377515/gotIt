@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,7 @@ public class PersonalProductFrag extends Fragment {
 
     private ProgressBar progressBar;
     private TextView progressText;
+    private ImageView imgEmpty;
 
 
     //    To catch errors
@@ -116,6 +118,13 @@ public class PersonalProductFrag extends Fragment {
                             progressBar.setVisibility(View.GONE);
                             progressText.setVisibility(View.GONE);
                             rvPosts.setVisibility(View.VISIBLE);
+                            if (offers.size() == 0){
+                                imgEmpty.setVisibility(View.VISIBLE);
+                                imgEmpty.setAlpha(0.0f);
+                                imgEmpty.animate().alpha(1.0f);
+                            }else{
+                                imgEmpty.setVisibility(View.GONE);
+                            }
                             createCards(rvPosts);
 
                         } else {
@@ -135,6 +144,7 @@ public class PersonalProductFrag extends Fragment {
         rvPosts = v.findViewById(R.id.rvPosts);
         progressBar = v.findViewById(R.id.progressBarPersonal);
         progressText = v.findViewById(R.id.progressTextPersonal);
+        imgEmpty = v.findViewById(R.id.imgEmtyPersonal);
         return v;
     }
 
@@ -155,6 +165,7 @@ public class PersonalProductFrag extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         progressText.setVisibility(View.VISIBLE);
         rvPosts.setVisibility(View.INVISIBLE);
+        imgEmpty.setVisibility(View.GONE);
         getDataFromFirebase();
 
 

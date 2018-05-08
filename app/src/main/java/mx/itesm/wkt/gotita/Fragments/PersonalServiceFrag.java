@@ -18,6 +18,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LayoutAnimationController;
 import android.view.animation.LinearInterpolator;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -49,6 +50,7 @@ public class PersonalServiceFrag extends Fragment {
 
     private ProgressBar progressBar;
     private TextView progressText;
+    private ImageView imgEmpty;
 
 
     //    To catch errors
@@ -116,7 +118,16 @@ public class PersonalServiceFrag extends Fragment {
                             progressBar.setVisibility(View.GONE);
                             progressText.setVisibility(View.GONE);
                             rvPosts.setVisibility(View.VISIBLE);
+                            if (offers.size() == 0){
+                                imgEmpty.setVisibility(View.VISIBLE);
+                                imgEmpty.setAlpha(0.0f);
+                                imgEmpty.animate().alpha(1.0f);
+                            }else{
+
+                                imgEmpty.setVisibility(View.GONE);
+                            }
                             createCards(rvPosts);
+
 
                         } else {
                             Log.e(TAG, "Error getting documents.", task.getException());
@@ -134,7 +145,7 @@ public class PersonalServiceFrag extends Fragment {
         rvPosts = v.findViewById(R.id.rvPosts);
         progressBar = v.findViewById(R.id.progressBarPersonal);
         progressText = v.findViewById(R.id.progressTextPersonal);
-
+        imgEmpty = v.findViewById(R.id.imgEmtyPersonal);
 
         return v;
     }
@@ -154,6 +165,7 @@ public class PersonalServiceFrag extends Fragment {
         progressBar.setVisibility(View.VISIBLE);
         progressText.setVisibility(View.VISIBLE);
         rvPosts.setVisibility(View.INVISIBLE);
+        imgEmpty.setVisibility(View.GONE);
         getDataFromFirebase();
     }
 
