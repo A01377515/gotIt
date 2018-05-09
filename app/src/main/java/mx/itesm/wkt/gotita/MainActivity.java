@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
 //        Firebase Auth
         mAuth=FirebaseAuth.getInstance();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+
         facebookAuth();
         googleAuth();
 
@@ -124,8 +127,7 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+
     }
 
     private void handleFacebookAccessToken(AccessToken token) {

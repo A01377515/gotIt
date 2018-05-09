@@ -15,19 +15,19 @@
       },
       "oauth_client": [
         {
+          "client_id": "370915203252-tf57hjpk69019a9ll79obim68jrr7uh3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.itesm.wkt.gotita",
+            "certificate_hash": "8f094a4b194bf6b74e21b234fb3c3753522cd770"
+          }
+        },
+        {
           "client_id": "370915203252-95g9iajrtv9cas7n4qe3olf8skt0nlpa.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "mx.itesm.wkt.gotita",
             "certificate_hash": "02baf325957e70d072ffa2ef3504b0bf1f8265d4"
-          }
-        },
-        {
-          "client_id": "370915203252-56lfhntepjf5a3hqsrsk59lrnosfsq91.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "mx.itesm.wkt.gotita",
-            "certificate_hash": "d1ac193e67cb8e965c9ef49d7b5c7768072fcce9"
           }
         },
         {
@@ -56,15 +56,15 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
+              "client_id": "370915203252-tb5n5dqhogu0of59o7amjva1e0vv809r.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
               "client_id": "370915203252-1gcoc3qcffu62mttndenjbnonrorqo56.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "mx.hmsa.gotIt"
               }
-            },
-            {
-              "client_id": "370915203252-tb5n5dqhogu0of59o7amjva1e0vv809r.apps.googleusercontent.com",
-              "client_type": 3
             }
           ]
         },
